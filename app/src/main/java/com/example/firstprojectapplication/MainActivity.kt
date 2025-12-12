@@ -11,23 +11,22 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private var selectedMode: String? = null // "Truth" or "Dare"
+    private var selectedMode: String? = null
+    private lateinit var firebaseManager: FirebaseHistoryManager // Changed from historyManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-//        Values
+        // Initialize Firebase manager
+        firebaseManager = FirebaseHistoryManager()
 
         val nameInput = findViewById<EditText>(R.id.nameInput)
         val btnTruth = findViewById<Button>(R.id.btnTruth)
         val btnDare = findViewById<Button>(R.id.btnDare)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
+        val btnViewHistory = findViewById<Button>(R.id.btnViewHistory)
 
-
-
-//        choices for fate
         btnTruth.setOnClickListener {
             selectedMode = "Truth"
         }
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             selectedMode = "Dare"
         }
 
-//        condition for validation the user cannot submit if not picked a button
         btnSubmit.setOnClickListener {
             val name = nameInput.text.toString().trim()
             if (name.isNotEmpty() && selectedMode != null) {
@@ -45,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("mode", selectedMode)
                 startActivity(intent)
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-
             } else {
                 Toast.makeText(
                     this,
@@ -55,6 +52,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnViewHistory.setOnClickListener {
+            val intent = Intent(this, PlayerHistoryActivity::class.java)
+            startActivity(intent)
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -63,5 +64,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-

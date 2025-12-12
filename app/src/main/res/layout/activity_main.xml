@@ -51,6 +51,20 @@
     app:layout_constraintTop_toBottomOf="@id/btnTruth"
     app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/btnViewHistory"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#6F664E"
+        android:text="View History"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/bangers"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnSubmit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 
