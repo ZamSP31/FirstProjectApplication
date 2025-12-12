@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/playerIntroText"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/fate_background_border"
+        android:fontFamily="@font/lucky"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Choose your fate:\nTap Truth to spill your secrets,\nor Dare to take the challenge."
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInput" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#6F664E"
+        android:clickable="true"
+    android:drawablePadding="6dp"
+    android:elevation="6dp"
+    android:focusable="true"
+    android:fontFamily="@font/bangers"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="12dp"
+    android:stateListAnimator="@null"
+    android:text="Submit"
+    android:textColor="#FFFFFF"
+    android:textSize="26sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btnTruth"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/edittext_border"
+        android:gravity="center"
+        android:hint="Player Name"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
+
+
+    <Button
+        android:id="@+id/btnDare"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#B89F6B"
+        android:clickable="true"
+        android:drawableStart="@drawable/jog"
+        android:drawablePadding="8dp"
+        android:elevation="6dp"
+        android:focusable="true"
+        android:fontFamily="@font/bangers"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="12dp"
+        android:stateListAnimator="@null"
+        android:text="Dare"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:icon="@drawable/jog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnTruth"
+        app:layout_constraintTop_toBottomOf="@id/playerIntroText" />
+
+    <Button
+        android:id="@+id/btnTruth"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#8FA17F"
+        android:clickable="true"
+        android:drawableStart="@drawable/chat"
+        android:drawablePadding="8dp"
+        android:elevation="6dp"
+        android:focusable="true"
+        android:fontFamily="@font/bangers"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="12dp"
+        android:stateListAnimator="@null"
+        android:text="Truth"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:icon="@drawable/chat"
+        app:layout_constraintEnd_toStartOf="@id/btnDare"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerIntroText" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/bangers"
+        android:layerType="software"
+        android:padding="8dp"
+        android:text="No Secrets. No Limits. Just Dares."
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "97587113759",
+    "project_id": "employeerecords-a89c7",
+    "storage_bucket": "employeerecords-a89c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97587113759:android:75e289440b540d06708a2a",
+        "android_client_info": {
+          "package_name": "com.example.employeerecords"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDYXkGN7ornfLYe2NMG8_yxhEGocAX9QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
