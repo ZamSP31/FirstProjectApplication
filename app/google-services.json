@@ -1,21 +1,22 @@
 {
   "project_info": {
-    "project_number": "97587113759",
-    "project_id": "employeerecords-a89c7",
-    "storage_bucket": "employeerecords-a89c7.firebasestorage.app"
+    "project_number": "829574604006",
+    "firebase_url": "https://truthordaregame-d192f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "truthordaregame-d192f",
+    "storage_bucket": "truthordaregame-d192f.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:97587113759:android:75e289440b540d06708a2a",
+        "mobilesdk_app_id": "1:829574604006:android:f6c7ba7b5bbba4b31a8727",
         "android_client_info": {
-          "package_name": "com.example.employeerecords"
+          "package_name": "com.example.firstprojectapplication"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCDYXkGN7ornfLYe2NMG8_yxhEGocAX9QA"
+          "current_key": "AIzaSyBpsKKY0iYPVHp8gfViVd4m8FXE20J1nr4"
         }
       ],
       "services": {
