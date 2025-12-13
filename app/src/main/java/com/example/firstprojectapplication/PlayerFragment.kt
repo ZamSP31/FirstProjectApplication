@@ -13,25 +13,99 @@ import androidx.fragment.app.Fragment
 class PlayerFragment : Fragment() {
 
     private val truthList = listOf(
+        // Personal & Fun
         "What's the most embarrassing thing you've done while drunk?",
         "Have you ever had a crush on someone in this room?",
         "What's a secret you've never told anyone?",
         "Who was your first crush?",
         "Who was your first kiss, and how was it?",
         "What's the biggest lie you've ever told?",
-        "Have you ever cheated on a test?",
-        "What's your biggest fear?"
+        "What's your biggest fear?",
+        "Have you ever cheated on a test or exam?",
+        "What's the weirdest dream you've ever had?",
+        "Who in this room would you most like to make out with?",
+
+        // Relationships
+        "Have you ever had a crush on a teacher?",
+        "What's the longest you've gone without showering?",
+        "Have you ever been in love?",
+        "What's your biggest regret in a relationship?",
+        "Have you ever ghosted someone? Why?",
+        "What's the most childish thing you still do?",
+        "Have you ever lied to your best friend?",
+        "What's something you're glad your parents don't know about you?",
+
+        // Spicy
+        "What's the most trouble you've been in?",
+        "Have you ever sent a risky text to the wrong person?",
+        "What's the most embarrassing thing in your search history?",
+        "Have you ever had a wardrobe malfunction in public?",
+        "What's the weirdest place you've ever cried?",
+        "Have you ever pretended to like a gift you actually hated?",
+        "What's something you've done that you'd never want your family to know?",
+        "Have you ever stalked someone on social media?",
+
+        // Random & Funny
+        "If you could be invisible for a day, what would you do?",
+        "What's the worst date you've ever been on?",
+        "Have you ever peed in a pool?",
+        "What's the grossest thing you've ever eaten?",
+        "Have you ever farted in public and blamed someone else?",
+        "What's your most embarrassing childhood memory?",
+        "Have you ever picked your nose in public?",
+        "What's the dumbest thing you've ever done for attention?"
     )
 
     private val dareList = listOf(
+        // Physical Challenges
         "Do 10 jumping jacks!",
-        "Run around the Main Building fountain three times yelling your favorite song.",
-        "Act like a chicken for 10 seconds.",
+        "Do 20 push-ups right now!",
+        "Hold a plank position for 1 minute!",
+        "Do your best TikTok dance!",
+        "Spin around 10 times and try to walk in a straight line!",
+        "Do the worm dance move!",
+        "Attempt to do a cartwheel!",
+        "Act like a chicken for 30 seconds!",
+
+        // Social Media & Texting
         "Text someone 'I love pineapples 🍍'.",
-        "Walk through España Blvd. waving at every person passing by.",
-        "Do your best celebrity impression.",
-        "Speak in an accent for the next 3 rounds.",
-        "Let someone else post a status on your social media."
+        "Post an embarrassing selfie on your story!",
+        "Let someone else post anything on your social media!",
+        "Send a voice memo to your crush saying hi!",
+        "Text your ex 'Hey, what's up?'",
+        "Change your profile picture to an embarrassing childhood photo!",
+        "Call a random contact and sing 'Happy Birthday' to them!",
+
+        // Performance
+        "Sing a song chosen by the group!",
+        "Do your best celebrity impression!",
+        "Speak in an accent for the next 3 rounds!",
+        "Freestyle rap about everyone in the room!",
+        "Talk without closing your mouth for 2 minutes!",
+        "Yell out the first word that comes to your mind!",
+        "Imitate a baby being born!",
+
+        // Creative & Funny
+        "Wear your clothes backwards for the rest of the game!",
+        "Let someone draw on your face with a marker!",
+        "Eat a spoonful of hot sauce or mustard!",
+        "Smell everyone's feet and rank them from best to worst!",
+        "Let the group give you a new hairstyle!",
+        "Do a dramatic reading of the last text you sent!",
+
+        // Public Challenges
+        "Run around the Main Building fountain three times yelling your favorite song!",
+        "Walk through España Blvd. waving at every person passing by!",
+        "Go outside and dance with no music for 1 minute!",
+        "Knock on a random door and ask if they have seen your pet unicorn!",
+
+        // Group Interaction
+        "Let someone tickle you for 30 seconds!",
+        "Switch clothes with someone in the room!",
+        "Give everyone in the room a compliment!",
+        "Share your most embarrassing photo on your phone!",
+        "Let the group read your last 5 text messages out loud!",
+        "Do whatever the person to your left tells you to do (within reason)!"
     )
 
     private var playerName: String = ""
@@ -99,26 +173,28 @@ class PlayerFragment : Fragment() {
 
         currentChallenge = challenge
 
-        val title = if (mode == "Truth") "🤐 Your Truth" else "💪 Your Dare"
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_reveal_challenge, null)
+        val dialogEmoji = dialogView.findViewById<TextView>(R.id.dialogEmoji)
+        val dialogTitle = dialogView.findViewById<TextView>(R.id.dialogTitle)
+        val dialogChallenge = dialogView.findViewById<TextView>(R.id.dialogChallenge)
 
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(challenge)
+        if (mode == "Truth") {
+            dialogEmoji.text = "🤐"
+            dialogTitle.text = "Your Truth"
+        } else {
+            dialogEmoji.text = "💪"
+            dialogTitle.text = "Your Dare"
+        }
+
+        dialogChallenge.text = challenge
+
+        AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
             .setPositiveButton("Accept Challenge") { _, _ ->
                 challengeText.text = challenge
                 challengeText.visibility = View.VISIBLE
-
-
-
             }
-            .setNegativeButton("Skip (Chicken!)") { dialog, _ ->
-                Toast.makeText(
-                    requireContext(),
-                    "$playerName chickened out! 🐔",
-                    Toast.LENGTH_SHORT
-                ).show()
-                dialog.dismiss()
-            }
+            .setCancelable(false)
             .show()
     }
 

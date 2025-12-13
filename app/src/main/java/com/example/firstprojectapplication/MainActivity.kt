@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        // Show welcome dialog when app starts
         showWelcomeDialog()
 
         val nameInput = findViewById<EditText>(R.id.nameInput)
@@ -43,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         btnSubmit.setOnClickListener {
             val name = nameInput.text.toString().trim()
             if (name.isNotEmpty() && selectedMode != null) {
-                // Show confirmation dialog before proceeding
                 showConfirmationDialog(name, selectedMode!!)
             } else {
                 Toast.makeText(
@@ -57,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
 
         btnMultiPlayer.setOnClickListener {
-            // Show info dialog about multi-player mode
             showMultiPlayerInfoDialog()
         }
 
@@ -69,52 +65,55 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showWelcomeDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("🎲 Welcome to Truth or Dare!")
-            .setMessage("Ready to reveal secrets or face challenges?\n\nChoose wisely... there's no turning back!")
-            .setPositiveButton("Let's Go!") { dialog, _ ->
-                dialog.dismiss()
-            }
+        val dialogView = layoutInflater.inflate(R.layout.dialog_welcome, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setPositiveButton("Let's Play!", null)
             .setCancelable(false)
-            .show()
+            .create()
+
+        dialog.show()
     }
 
     private fun showConfirmationDialog(name: String, mode: String) {
+        val emoji = if (mode == "Truth") "🤐" else "💪"
+        val title = if (mode == "Truth") "Ready for the Truth?" else "Ready for the Dare?"
         val message = if (mode == "Truth") {
-            "$name, are you ready to reveal your deepest secrets?"
+            "$name, you chose TRUTH!\n\nTime to spill your secrets..."
         } else {
-            "$name, are you brave enough to face the dare?"
+            "$name, you chose DARE!\n\nGet ready for a challenge..."
         }
 
         AlertDialog.Builder(this)
-            .setTitle("⚠️ Are You Sure?")
+            .setTitle("$emoji $title")
             .setMessage(message)
-            .setPositiveButton("Yes, I'm Ready!") { dialog, _ ->
-                // Proceed to SecondPage
+            .setPositiveButton("I'm Ready!") { dialogInterface, _ ->
                 val intent = Intent(this, SecondPage::class.java)
                 intent.putExtra("playerName", name)
                 intent.putExtra("mode", mode)
                 startActivity(intent)
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                dialog.dismiss()
+                dialogInterface.dismiss()
             }
-            .setNegativeButton("Wait, Let Me Think...") { dialog, _ ->
-                dialog.dismiss()
+            .setNegativeButton("Go Back") { dialogInterface, _ ->
+                dialogInterface.dismiss()
             }
+            .setCancelable(false)
             .show()
     }
 
     private fun showMultiPlayerInfoDialog() {
         AlertDialog.Builder(this)
             .setTitle("🎮 Multi-Player Mode")
-            .setMessage("Play with 2-10 friends!\n\n• Add player names\n• Swipe between players\n• Each gets their own turn\n• All saved to history")
-            .setPositiveButton("Start Setup") { dialog, _ ->
+            .setMessage("Play with your friends!\n\n✓ Add 2-10 players\n✓ Swipe to switch turns\n✓ Everyone gets a challenge\n✓ All saves to history")
+            .setPositiveButton("Start Setup") { dialogInterface, _ ->
                 val intent = Intent(this, MultiPlayerSetupActivity::class.java)
                 startActivity(intent)
-                dialog.dismiss()
+                dialogInterface.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
+            .setNegativeButton("Cancel") { dialogInterface, _ ->
+                dialogInterface.dismiss()
             }
             .show()
     }
