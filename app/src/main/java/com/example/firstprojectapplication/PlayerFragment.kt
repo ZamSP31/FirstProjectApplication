@@ -34,7 +34,6 @@ class PlayerFragment : Fragment() {
         "Let someone else post a status on your social media."
     )
 
-    private lateinit var firebaseManager: FirebaseHistoryManager
     private var playerName: String = ""
     private var currentChallenge: String = ""
 
@@ -49,7 +48,6 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        firebaseManager = FirebaseHistoryManager()
         playerName = arguments?.getString("playerName") ?: "Player"
 
         val nameText = view.findViewById<TextView>(R.id.fragmentPlayerName)
@@ -110,22 +108,8 @@ class PlayerFragment : Fragment() {
                 challengeText.text = challenge
                 challengeText.visibility = View.VISIBLE
 
-                // Save to Firebase
-                val playerData = PlayerData(
-                    playerName = playerName,
-                    mode = mode,
-                    challenge = challenge
-                )
 
-                firebaseManager.savePlayerData(playerData) { success ->
-                    if (!success) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Failed to save",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+
             }
             .setNegativeButton("Skip (Chicken!)") { dialog, _ ->
                 Toast.makeText(

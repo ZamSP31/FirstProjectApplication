@@ -29,9 +29,7 @@
             android:name=".SecondPage"
             android:exported="false" />
 
-        <activity
-            android:name=".PlayerHistoryActivity"
-            android:exported="false" />
+
 
         <activity
             android:name=".MultiPlayerSetupActivity"

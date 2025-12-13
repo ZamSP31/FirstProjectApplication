@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,6 @@ class MultiPlayerSetupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multi_player_setup)
 
-        // Show setup instructions
         showSetupInstructionsDialog()
 
         nameInput = findViewById(R.id.playerNameInput)
@@ -29,15 +29,23 @@ class MultiPlayerSetupActivity : AppCompatActivity() {
         val btnBack = findViewById<Button>(R.id.btnBackFromSetup)
         val recyclerView = findViewById<RecyclerView>(R.id.playerListRecyclerView)
 
-        // Setup RecyclerView for player list
+        // Handle back button press with new API
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (playerNames.isNotEmpty()) {
+                    showExitConfirmationDialog()
+                } else {
+                    finish()
+                }
+            }
+        })
+
         adapter = PlayerSetupAdapter(playerNames) { position ->
-            // Show confirmation before removing player
             showRemovePlayerDialog(position)
         }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Add player button
         btnAddPlayer.setOnClickListener {
             val name = nameInput.text.toString().trim()
             if (name.isNotEmpty()) {
@@ -54,7 +62,6 @@ class MultiPlayerSetupActivity : AppCompatActivity() {
             }
         }
 
-        // Start game button
         btnStartGame.setOnClickListener {
             if (playerNames.size >= 2) {
                 showStartGameDialog()
@@ -63,7 +70,6 @@ class MultiPlayerSetupActivity : AppCompatActivity() {
             }
         }
 
-        // Back button
         btnBack.setOnClickListener {
             if (playerNames.isNotEmpty()) {
                 showExitConfirmationDialog()
@@ -126,13 +132,5 @@ class MultiPlayerSetupActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .show()
-    }
-
-    override fun onBackPressed() {
-        if (playerNames.isNotEmpty()) {
-            showExitConfirmationDialog()
-        } else {
-            super.onBackPressed()
-        }
     }
 }

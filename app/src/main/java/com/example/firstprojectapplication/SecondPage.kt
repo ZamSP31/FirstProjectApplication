@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,7 +30,6 @@ class SecondPage : AppCompatActivity() {
         "Walk through España Blvd. waving at every person passing by."
     )
 
-    private lateinit var firebaseManager: FirebaseHistoryManager
     private lateinit var currentChallenge: String
     private lateinit var currentName: String
     private lateinit var currentMode: String
@@ -38,8 +37,6 @@ class SecondPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second_page)
-
-        firebaseManager = FirebaseHistoryManager()
 
         currentName = intent.getStringExtra("playerName") ?: "Player"
         currentMode = intent.getStringExtra("mode") ?: "Truth"
@@ -52,27 +49,17 @@ class SecondPage : AppCompatActivity() {
 
         nameTview.text = "Hello, $currentName!"
 
+        // Handle back button press with new API
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitConfirmationDialog()
+            }
+        })
+
         fun showRandomPassage() {
             val passage = if (currentMode == "Truth") truthList.random() else dareList.random()
             currentChallenge = passage
             passageTview.text = passage
-
-            // Save to Firebase
-            val playerData = PlayerData(
-                playerName = currentName,
-                mode = currentMode,
-                challenge = passage
-            )
-
-            firebaseManager.savePlayerData(playerData) { success ->
-                if (!success) {
-                    Toast.makeText(
-                        this,
-                        "Failed to save to history",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
         }
 
         showRandomPassage()
@@ -81,7 +68,6 @@ class SecondPage : AppCompatActivity() {
             showRandomPassage()
         }
 
-        // Complete button - shows rating dialog
         completeButton.setOnClickListener {
             showCompletionDialog()
         }
@@ -159,12 +145,6 @@ class SecondPage : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         finish()
-    }
-
-    // Handle back button press
-    override fun onBackPressed() {
-        showExitConfirmationDialog()
     }
 }

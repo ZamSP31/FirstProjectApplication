@@ -13,13 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
     private var selectedMode: String? = null
-    private lateinit var firebaseManager: FirebaseHistoryManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        firebaseManager = FirebaseHistoryManager()
 
         // Show welcome dialog when app starts
         showWelcomeDialog()
@@ -28,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         val btnTruth = findViewById<Button>(R.id.btnTruth)
         val btnDare = findViewById<Button>(R.id.btnDare)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
-        val btnViewHistory = findViewById<Button>(R.id.btnViewHistory)
         val btnMultiPlayer = findViewById<Button>(R.id.btnMultiPlayer)
 
         btnTruth.setOnClickListener {
@@ -57,10 +54,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnViewHistory.setOnClickListener {
-            val intent = Intent(this, PlayerHistoryActivity::class.java)
-            startActivity(intent)
-        }
+
 
         btnMultiPlayer.setOnClickListener {
             // Show info dialog about multi-player mode
