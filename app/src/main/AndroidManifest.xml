@@ -33,6 +33,14 @@
             android:name=".PlayerHistoryActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MultiPlayerSetupActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".GamePagerActivity"
+            android:exported="false" />
+
 
     </application>
 

@@ -61,19 +61,19 @@ class PlayerHistoryActivity : AppCompatActivity() {
 
     private fun showDeleteDialog(playerData: PlayerData) {
         AlertDialog.Builder(this)
-            .setTitle("Delete Entry")
-            .setMessage("Delete ${playerData.playerName}'s entry?")
+            .setTitle("🗑️ Delete Entry")
+            .setMessage("Delete ${playerData.playerName}'s ${playerData.mode} challenge?\n\n\"${playerData.challenge}\"")
             .setPositiveButton("Delete") { _, _ ->
                 firebaseManager.deleteEntry(playerData.id) { success ->
                     if (success) {
-                        Toast.makeText(this, "Entry deleted", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "✅ Entry deleted", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "❌ Failed to delete", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             .setNegativeButton("Cancel", null)
-            .setNeutralButton("Clear All") { _, _ ->
+            .setNeutralButton("Clear All History") { _, _ ->
                 showClearAllDialog()
             }
             .show()
@@ -81,18 +81,20 @@ class PlayerHistoryActivity : AppCompatActivity() {
 
     private fun showClearAllDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Clear All History")
-            .setMessage("Are you sure you want to delete ALL player history?")
-            .setPositiveButton("Yes, Clear All") { _, _ ->
+            .setTitle("⚠️ Clear All History")
+            .setMessage("This will permanently delete ALL player history!\n\nAre you absolutely sure?")
+            .setPositiveButton("Yes, Delete Everything") { _, _ ->
                 firebaseManager.clearHistory { success ->
                     if (success) {
-                        Toast.makeText(this, "History cleared", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "🗑️ All history cleared", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Failed to clear history", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "❌ Failed to clear history", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("No, Keep It") { dialog, _ ->
+                dialog.dismiss()
+            }
             .show()
     }
 }

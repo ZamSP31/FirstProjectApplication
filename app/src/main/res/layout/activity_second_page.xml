@@ -39,9 +39,21 @@
             android:fontFamily="@font/lucky"
             android:layout_marginBottom="32dp"
             android:gravity="center"
-            android:text="What’s your most embarrassing moment?"
+            android:text="What's your most embarrassing moment?"
             android:textColor="#000000"
             android:textSize="45sp" />
+
+        <Button
+            android:id="@+id/completeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#6F664E"
+            android:elevation="4dp"
+            android:fontFamily="@font/bangers"
+            android:text="Mark as Complete"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/againButton"
