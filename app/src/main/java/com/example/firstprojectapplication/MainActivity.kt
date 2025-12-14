@@ -51,8 +51,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-
         btnMultiPlayer.setOnClickListener {
             showMultiPlayerInfoDialog()
         }
@@ -106,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     private fun showMultiPlayerInfoDialog() {
         AlertDialog.Builder(this)
             .setTitle("🎮 Multi-Player Mode")
-            .setMessage("Play with your friends!\n\n✓ Add 2-10 players\n✓ Swipe to switch turns\n✓ Everyone gets a challenge\n✓ All saves to history")
+            .setMessage("Play with your friends!\n\n✓ Add 2-10 players\n✓ Swipe to switch turns\n✓ Everyone gets a challenge")
             .setPositiveButton("Start Setup") { dialogInterface, _ ->
                 val intent = Intent(this, MultiPlayerSetupActivity::class.java)
                 startActivity(intent)

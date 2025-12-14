@@ -63,7 +63,7 @@
         android:textColor="#FFFFFF"
         android:fontFamily="@font/bangers"
         android:textSize="20sp"
-
+        app:layout_constraintTop_toBottomOf="@id/btnSubmit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

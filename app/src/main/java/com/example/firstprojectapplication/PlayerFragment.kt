@@ -188,7 +188,7 @@ class PlayerFragment : Fragment() {
 
         dialogChallenge.text = challenge
 
-        AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+        AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .setPositiveButton("Accept Challenge") { _, _ ->
                 challengeText.text = challenge

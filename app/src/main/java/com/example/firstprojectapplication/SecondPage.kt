@@ -169,7 +169,7 @@ class SecondPage : AppCompatActivity() {
             "How epic was your dare?"
         }
 
-        AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        AlertDialog.Builder(this)
             .setView(dialogView)
             .setPositiveButton("Submit") { _, _ ->
                 val rating = ratingBar.rating
@@ -191,7 +191,7 @@ class SecondPage : AppCompatActivity() {
             else -> "🐔" to "Chicken! Do better next round!"
         }
 
-        AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        AlertDialog.Builder(this)
             .setTitle("$emoji Rating Recorded!")
             .setMessage(message)
             .setPositiveButton("Play Again") { _, _ ->
@@ -204,7 +204,7 @@ class SecondPage : AppCompatActivity() {
     }
 
     private fun showExitConfirmationDialog() {
-        AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        AlertDialog.Builder(this)
             .setTitle("⚠️ Leave Game?")
             .setMessage("Are you sure you want to quit?\n\nYour current challenge will be lost!")
             .setPositiveButton("Yes, Leave") { _, _ ->
